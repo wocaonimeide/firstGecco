@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gecco.firstgecco.mappers.FoodLevelDao">
+  <resultMap id="BaseResultMap" type="com.gecco.firstgecco.entities.FoodLevel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="dic_id" jdbcType="INTEGER" property="dicId" />
+    <result column="food_name" jdbcType="VARCHAR" property="foodName" />
+    <result column="gravida_level" jdbcType="VARCHAR" property="gravidaLevel" />
+    <result column="puerpera_level" jdbcType="VARCHAR" property="puerperaLevel" />
+    <result column="baby_level" jdbcType="VARCHAR" property="babyLevel" />
+    <result column="lactation_level" jdbcType="VARCHAR" property="lactationLevel" />
+    <result column="gravida_desc" jdbcType="VARCHAR" property="gravidaDesc" />
+    <result column="puerpera_desc" jdbcType="VARCHAR" property="puerperaDesc" />
+    <result column="baby_desc" jdbcType="VARCHAR" property="babyDesc" />
+    <result column="lactation_desc" jdbcType="VARCHAR" property="lactationDesc" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, dic_id, food_name, gravida_level, puerpera_level, baby_level, lactation_level, 
+    gravida_desc, puerpera_desc, baby_desc, lactation_desc
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from food_level
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from food_level
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.gecco.firstgecco.entities.FoodLevel" useGeneratedKeys="true">
+    insert into food_level (dic_id, food_name, gravida_level, 
+      puerpera_level, baby_level, lactation_level, 
+      gravida_desc, puerpera_desc, baby_desc, 
+      lactation_desc)
+    values (#{dicId,jdbcType=INTEGER}, #{foodName,jdbcType=VARCHAR}, #{gravidaLevel,jdbcType=VARCHAR}, 
+      #{puerperaLevel,jdbcType=VARCHAR}, #{babyLevel,jdbcType=VARCHAR}, #{lactationLevel,jdbcType=VARCHAR}, 
+      #{gravidaDesc,jdbcType=VARCHAR}, #{puerperaDesc,jdbcType=VARCHAR}, #{babyDesc,jdbcType=VARCHAR}, 
+      #{lactationDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.gecco.firstgecco.entities.FoodLevel" useGeneratedKeys="true">
+    insert into food_level
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dicId != null">
+        dic_id,
+      </if>
+      <if test="foodName != null">
+        food_name,
+      </if>
+      <if test="gravidaLevel != null">
+        gravida_level,
+      </if>
+      <if test="puerperaLevel != null">
+        puerpera_level,
+      </if>
+      <if test="babyLevel != null">
+        baby_level,
+      </if>
+      <if test="lactationLevel != null">
+        lactation_level,
+      </if>
+      <if test="gravidaDesc != null">
+        gravida_desc,
+      </if>
+      <if test="puerperaDesc != null">
+        puerpera_desc,
+      </if>
+      <if test="babyDesc != null">
+        baby_desc,
+      </if>
+      <if test="lactationDesc != null">
+        lactation_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dicId != null">
+        #{dicId,jdbcType=INTEGER},
+      </if>
+      <if test="foodName != null">
+        #{foodName,jdbcType=VARCHAR},
+      </if>
+      <if test="gravidaLevel != null">
+        #{gravidaLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="puerperaLevel != null">
+        #{puerperaLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="babyLevel != null">
+        #{babyLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="lactationLevel != null">
+        #{lactationLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="gravidaDesc != null">
+        #{gravidaDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="puerperaDesc != null">
+        #{puerperaDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="babyDesc != null">
+        #{babyDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="lactationDesc != null">
+        #{lactationDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gecco.firstgecco.entities.FoodLevel">
+    update food_level
+    <set>
+      <if test="dicId != null">
+        dic_id = #{dicId,jdbcType=INTEGER},
+      </if>
+      <if test="foodName != null">
+        food_name = #{foodName,jdbcType=VARCHAR},
+      </if>
+      <if test="gravidaLevel != null">
+        gravida_level = #{gravidaLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="puerperaLevel != null">
+        puerpera_level = #{puerperaLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="babyLevel != null">
+        baby_level = #{babyLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="lactationLevel != null">
+        lactation_level = #{lactationLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="gravidaDesc != null">
+        gravida_desc = #{gravidaDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="puerperaDesc != null">
+        puerpera_desc = #{puerperaDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="babyDesc != null">
+        baby_desc = #{babyDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="lactationDesc != null">
+        lactation_desc = #{lactationDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gecco.firstgecco.entities.FoodLevel">
+    update food_level
+    set dic_id = #{dicId,jdbcType=INTEGER},
+      food_name = #{foodName,jdbcType=VARCHAR},
+      gravida_level = #{gravidaLevel,jdbcType=VARCHAR},
+      puerpera_level = #{puerperaLevel,jdbcType=VARCHAR},
+      baby_level = #{babyLevel,jdbcType=VARCHAR},
+      lactation_level = #{lactationLevel,jdbcType=VARCHAR},
+      gravida_desc = #{gravidaDesc,jdbcType=VARCHAR},
+      puerpera_desc = #{puerperaDesc,jdbcType=VARCHAR},
+      baby_desc = #{babyDesc,jdbcType=VARCHAR},
+      lactation_desc = #{lactationDesc,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByFoodName" parameterType="com.gecco.firstgecco.entities.FoodLevel" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from food_level
+    where food_name = #{foodName,jdbcType=VARCHAR}
+  </select>
+</mapper>
