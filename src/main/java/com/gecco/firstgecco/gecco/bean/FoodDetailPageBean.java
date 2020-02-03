@@ -5,7 +5,7 @@ import com.geccocrawler.gecco.annotation.HtmlField;
 import com.geccocrawler.gecco.annotation.RequestParameter;
 import com.geccocrawler.gecco.spider.HtmlBean;
 
-@Gecco(matchUrl = "http://www.mama.cn/z/{itmeId}/",pipelines = "foodDetailPageBeanPipeline")
+@Gecco(matchUrl = "http://www.mama.cn/z/{itmeId}/", pipelines = "foodDetailPageBeanPipeline")
 public class FoodDetailPageBean implements HtmlBean {
 
     @RequestParameter

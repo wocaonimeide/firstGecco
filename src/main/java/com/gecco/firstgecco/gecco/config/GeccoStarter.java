@@ -7,6 +7,9 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 @Component
 public class GeccoStarter {
 
@@ -14,8 +17,8 @@ public class GeccoStarter {
     private SpringPipelineFactory pipelineFactory;
 
     @EventListener(classes = {ContextRefreshedEvent.class})
-    private void listener(ContextRefreshedEvent event){
-        HttpGetRequest request=new HttpGetRequest("http://www.mama.cn/z/t20021/");
+    private void listener(ContextRefreshedEvent event) {
+        HttpGetRequest request = new HttpGetRequest("http://www.mama.cn/z/t20021/");
         GeccoEngine.create()
                 //工程的包路径
                 .classpath("com.gecco.firstgecco.gecco")
@@ -33,6 +36,10 @@ public class GeccoStarter {
                 .debug(false)
                 .pipelineFactory(pipelineFactory)
                 .start();
+        String par = "";
+        Pattern pattern = Pattern.compile(par);
+        String waitPar = "";
+        Matcher matcher = pattern.matcher(waitPar);
     }
 
 }

@@ -4,18 +4,15 @@ import java.io.Serializable;
 
 /**
  * dictionary_entity
- * @author 
+ *
+ * @author
  */
 public class DictionaryEntity implements Serializable {
-    private Integer id;
-
-    private String dictionaryCode;
-
-    private String dictionaryType;
-
-    private String dictionaryName;
-
     private static final long serialVersionUID = 1L;
+    private Integer id;
+    private String dictionaryCode;
+    private String dictionaryType;
+    private String dictionaryName;
 
     public Integer getId() {
         return id;
@@ -62,9 +59,9 @@ public class DictionaryEntity implements Serializable {
         }
         DictionaryEntity other = (DictionaryEntity) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getDictionaryCode() == null ? other.getDictionaryCode() == null : this.getDictionaryCode().equals(other.getDictionaryCode()))
-            && (this.getDictionaryType() == null ? other.getDictionaryType() == null : this.getDictionaryType().equals(other.getDictionaryType()))
-            && (this.getDictionaryName() == null ? other.getDictionaryName() == null : this.getDictionaryName().equals(other.getDictionaryName()));
+                && (this.getDictionaryCode() == null ? other.getDictionaryCode() == null : this.getDictionaryCode().equals(other.getDictionaryCode()))
+                && (this.getDictionaryType() == null ? other.getDictionaryType() == null : this.getDictionaryType().equals(other.getDictionaryType()))
+                && (this.getDictionaryName() == null ? other.getDictionaryName() == null : this.getDictionaryName().equals(other.getDictionaryName()));
     }
 
     @Override

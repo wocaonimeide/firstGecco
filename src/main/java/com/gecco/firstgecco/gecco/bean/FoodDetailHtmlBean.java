@@ -14,7 +14,7 @@ public class FoodDetailHtmlBean implements HtmlBean {
     @HtmlField(cssPath = ".img-wrap > img")
     private String imageUrl;
 
-    @Href(click = true,value = "href")
+    @Href(click = true, value = "href")
     @HtmlField(cssPath = "a:nth-child(2)")
     private String foodUrl;
 

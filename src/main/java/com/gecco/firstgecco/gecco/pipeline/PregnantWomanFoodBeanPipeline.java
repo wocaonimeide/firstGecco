@@ -21,7 +21,7 @@ import java.util.List;
 @Component("pregnantWomanFoodBeanPipeline")
 public class PregnantWomanFoodBeanPipeline implements Pipeline<PregnantWomanFoodBean> {
 
-    private static final String HAS_NEXT_FLAG="››";
+    private static final String HAS_NEXT_FLAG = "››";
 
 
     @Autowired
@@ -32,25 +32,25 @@ public class PregnantWomanFoodBeanPipeline implements Pipeline<PregnantWomanFood
 
     @Override
     public void process(PregnantWomanFoodBean bean) {
-        List<FoodDetailHtmlBean> foodDetailHtmlBeans=bean.getFoodDetailHtmlBeans();
-        List<String> foodNames=new ArrayList<>();
+        List<FoodDetailHtmlBean> foodDetailHtmlBeans = bean.getFoodDetailHtmlBeans();
+        List<String> foodNames = new ArrayList<>();
         if (CollectionUtils.isNotEmpty(foodDetailHtmlBeans)) {
             for (FoodDetailHtmlBean foodDetailHtmlBean : foodDetailHtmlBeans) {
-                String titel=foodDetailHtmlBean.getFoodName();
+                String titel = foodDetailHtmlBean.getFoodName();
                 foodNames.add(titel);
             }
         }
-        String currUrl=bean.getRequest().getUrl();
-        int foodindex=StringUtils.indexOf(currUrl,"/f");
-        String foodCode=StringUtils.substring(currUrl,foodindex+2,foodindex+7);
-        DictionaryEntity temp=new DictionaryEntity();
+        String currUrl = bean.getRequest().getUrl();
+        int foodindex = StringUtils.indexOf(currUrl, "/f");
+        String foodCode = StringUtils.substring(currUrl, foodindex + 2, foodindex + 7);
+        DictionaryEntity temp = new DictionaryEntity();
         temp.setDictionaryType(MotherWebCrawlerBeanPipeline.FOOT);
         temp.setDictionaryCode(foodCode);
-        DictionaryEntity foodEntity=entityService.selectByTypeAndCode(temp);
-        if (null==foodEntity || null==foodEntity.getId()){
+        DictionaryEntity foodEntity = entityService.selectByTypeAndCode(temp);
+        if (null == foodEntity || null == foodEntity.getId()) {
             throw new RuntimeException("food entity is null");
         }
-        FoodLevel foodLevel=new FoodLevel();
+        FoodLevel foodLevel = new FoodLevel();
         for (String foodName : foodNames) {
             foodLevel.setDicId(foodEntity.getId());
             foodLevel.setFoodName(foodName);
@@ -58,21 +58,21 @@ public class PregnantWomanFoodBeanPipeline implements Pipeline<PregnantWomanFood
                 foodLevelService.insert(foodLevel);
             }
         }
-        List<HrefBean> hrefBeans=bean.getFootPageHrefas();
-        if (CollectionUtils.isNotEmpty(hrefBeans)){
-            boolean hasNext=false;
+        List<HrefBean> hrefBeans = bean.getFootPageHrefas();
+        if (CollectionUtils.isNotEmpty(hrefBeans)) {
+            boolean hasNext = false;
             for (HrefBean hrefBean : hrefBeans) {
-                if (StringUtils.equals(hrefBean.getTitle(),HAS_NEXT_FLAG)){
-                    hasNext=true;
+                if (StringUtils.equals(hrefBean.getTitle(), HAS_NEXT_FLAG)) {
+                    hasNext = true;
                     break;
                 }
             }
-            if (hasNext){
-                int index=currUrl.indexOf("_p");
-                if (index>-1){
-                    String nextUrl=StringUtils.substring(currUrl,0,index);
-                    Integer currPage=Integer.valueOf(StringUtils.substring(currUrl,index+2));
-                    nextUrl=nextUrl+"_p"+(currPage+1);
+            if (hasNext) {
+                int index = currUrl.indexOf("_p");
+                if (index > -1) {
+                    String nextUrl = StringUtils.substring(currUrl, 0, index);
+                    Integer currPage = Integer.valueOf(StringUtils.substring(currUrl, index + 2));
+                    nextUrl = nextUrl + "_p" + (currPage + 1);
                     DeriveSchedulerContext.into(new HttpGetRequest(nextUrl));
                 }
             }

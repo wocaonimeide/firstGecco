@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * 孕妇食谱 分类页面
  */
-@Gecco(matchUrl = MotherWebCrawlerBeanPipeline.DETAIL_URL,pipelines = "pregnantWomanFoodBeanPipeline")
+@Gecco(matchUrl = MotherWebCrawlerBeanPipeline.DETAIL_URL, pipelines = "pregnantWomanFoodBeanPipeline")
 public class PregnantWomanFoodBean implements HtmlBean {
 
     @Request

@@ -4,65 +4,55 @@ import java.io.Serializable;
 
 /**
  * food_level
- * @author 
+ *
+ * @author
  */
 public class FoodLevel implements Serializable {
+    private static final long serialVersionUID = 1L;
     /**
      * id
      */
     private Integer id;
-
     /**
      * 字典表id
      */
     private Integer dicId;
-
     /**
      * 食物名称
      */
     private String foodName;
-
     /**
      * 孕妇能不能吃
      */
     private String gravidaLevel;
-
     /**
      * 产妇能不能吃
      */
     private String puerperaLevel;
-
     /**
      * 婴儿能不能吃
      */
     private String babyLevel;
-
     /**
      * 哺乳期能不能吃
      */
     private String lactationLevel;
-
     /**
      * 孕妇描述
      */
     private String gravidaDesc;
-
     /**
      * 产妇描述
      */
     private String puerperaDesc;
-
     /**
      * 婴儿描述
      */
     private String babyDesc;
-
     /**
      * 哺乳期描述
      */
     private String lactationDesc;
-
-    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

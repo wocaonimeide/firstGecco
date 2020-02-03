@@ -14,13 +14,19 @@ public class FoodDetailPageBeanPipeline implements Pipeline<FoodDetailPageBean> 
     @Autowired
     private FoodLevelService foodLevelService;
 
+    public static void main(String[] args) {
+        String titel = "日本忙的功效和作用";
+        String foodName = StringUtils.substring(titel, 0, StringUtils.indexOf(titel, "的功效和作用"));
+        System.out.println(foodName);
+    }
+
     @Override
     public void process(FoodDetailPageBean bean) {
-        String titel=bean.getTitel();
-        String foodName= StringUtils.substring(titel,0,StringUtils.indexOf(titel,"的功效"));
-        FoodLevel temp=new FoodLevel();
+        String titel = bean.getTitel();
+        String foodName = StringUtils.substring(titel, 0, StringUtils.indexOf(titel, "的功效"));
+        FoodLevel temp = new FoodLevel();
         temp.setFoodName(foodName);
-        FoodLevel foodLevel=foodLevelService.selectByFoodName(temp);
+        FoodLevel foodLevel = foodLevelService.selectByFoodName(temp);
         if (foodLevel != null) {
             modifyLevel(bean);
             foodLevel.setBabyLevel(bean.getBabyLevel());
@@ -36,51 +42,45 @@ public class FoodDetailPageBeanPipeline implements Pipeline<FoodDetailPageBean> 
 
     }
 
-    private void modifyLevel(FoodDetailPageBean bean){
-        String level=null;
-        String yunLevel=null;
-        String chanLevel=null;
-        String buLevel=null;
+    private void modifyLevel(FoodDetailPageBean bean) {
+        String level = null;
+        String yunLevel = null;
+        String chanLevel = null;
+        String buLevel = null;
         for (String s : MotherWebCrawlerBeanPipeline.EAT_LEVEL.keySet()) {
-            if (bean.getBabyLevel().equals(MotherWebCrawlerBeanPipeline.EAT_LEVEL.get(s))){
-                level=s;
+            if (bean.getBabyLevel().equals(MotherWebCrawlerBeanPipeline.EAT_LEVEL.get(s))) {
+                level = s;
             }
-            if (bean.getYunFuLevel().equals(MotherWebCrawlerBeanPipeline.EAT_LEVEL.get(s))){
-                yunLevel=s;
+            if (bean.getYunFuLevel().equals(MotherWebCrawlerBeanPipeline.EAT_LEVEL.get(s))) {
+                yunLevel = s;
             }
-            if (bean.getChanFuLevel().equals(MotherWebCrawlerBeanPipeline.EAT_LEVEL.get(s))){
-                chanLevel=s;
+            if (bean.getChanFuLevel().equals(MotherWebCrawlerBeanPipeline.EAT_LEVEL.get(s))) {
+                chanLevel = s;
             }
-            if (bean.getBabyLevel().equals(MotherWebCrawlerBeanPipeline.EAT_LEVEL.get(s))){
-                buLevel=s;
+            if (bean.getBabyLevel().equals(MotherWebCrawlerBeanPipeline.EAT_LEVEL.get(s))) {
+                buLevel = s;
             }
         }
         if (level == null) {
             throw new RuntimeException("level is null");
-        }else {
+        } else {
             bean.setBabyLevel(level);
         }
         if (yunLevel == null) {
             throw new RuntimeException("level is null");
-        }else {
+        } else {
             bean.setYunFuLevel(yunLevel);
         }
         if (chanLevel == null) {
             throw new RuntimeException("level is null");
-        }else {
+        } else {
             bean.setChanFuLevel(chanLevel);
         }
         if (buLevel == null) {
             throw new RuntimeException("level is null");
-        }else {
+        } else {
             bean.setBuruqiLevel(buLevel);
         }
 
-    }
-
-    public static void main(String[] args) {
-        String titel="日本忙的功效和作用";
-        String foodName= StringUtils.substring(titel,0,StringUtils.indexOf(titel,"的功效和作用"));
-        System.out.println(foodName);
     }
 }

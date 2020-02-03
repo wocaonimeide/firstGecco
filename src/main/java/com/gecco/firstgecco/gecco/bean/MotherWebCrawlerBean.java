@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * 妈妈网爬虫 bean
  */
-@Gecco(matchUrl="http://www.mama.cn/z/t20021/",pipelines = {"motherWebCrawlerBeanPipeline"})
+@Gecco(matchUrl = "http://www.mama.cn/z/t20021/", pipelines = {"motherWebCrawlerBeanPipeline"})
 public class MotherWebCrawlerBean implements HtmlBean {
 
     private static final long serialVersionUID = -7127412585200687225L;

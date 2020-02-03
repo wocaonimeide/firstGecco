@@ -1,72 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gecco.firstgecco.mappers.DictionaryEntityDao">
-  <resultMap id="BaseResultMap" type="com.gecco.firstgecco.entities.DictionaryEntity">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="Dictionary_code" jdbcType="VARCHAR" property="dictionaryCode" />
-    <result column="Dictionary_type" jdbcType="VARCHAR" property="dictionaryType" />
-    <result column="Dictionary_name" jdbcType="VARCHAR" property="dictionaryName" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.gecco.firstgecco.entities.DictionaryEntity">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="Dictionary_code" jdbcType="VARCHAR" property="dictionaryCode"/>
+        <result column="Dictionary_type" jdbcType="VARCHAR" property="dictionaryType"/>
+        <result column="Dictionary_name" jdbcType="VARCHAR" property="dictionaryName"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, Dictionary_code, Dictionary_type, Dictionary_name
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from dictionary_entity
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dictionary_entity
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from dictionary_entity
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.gecco.firstgecco.entities.DictionaryEntity" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.gecco.firstgecco.entities.DictionaryEntity"
+            useGeneratedKeys="true">
     insert into dictionary_entity (Dictionary_code, Dictionary_type, Dictionary_name
       )
     values (#{dictionaryCode,jdbcType=VARCHAR}, #{dictionaryType,jdbcType=VARCHAR}, #{dictionaryName,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.gecco.firstgecco.entities.DictionaryEntity" useGeneratedKeys="true">
-    insert into dictionary_entity
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="dictionaryCode != null">
-        Dictionary_code,
-      </if>
-      <if test="dictionaryType != null">
-        Dictionary_type,
-      </if>
-      <if test="dictionaryName != null">
-        Dictionary_name,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="dictionaryCode != null">
-        #{dictionaryCode,jdbcType=VARCHAR},
-      </if>
-      <if test="dictionaryType != null">
-        #{dictionaryType,jdbcType=VARCHAR},
-      </if>
-      <if test="dictionaryName != null">
-        #{dictionaryName,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.gecco.firstgecco.entities.DictionaryEntity">
-    update dictionary_entity
-    <set>
-      <if test="dictionaryCode != null">
-        Dictionary_code = #{dictionaryCode,jdbcType=VARCHAR},
-      </if>
-      <if test="dictionaryType != null">
-        Dictionary_type = #{dictionaryType,jdbcType=VARCHAR},
-      </if>
-      <if test="dictionaryName != null">
-        Dictionary_name = #{dictionaryName,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.gecco.firstgecco.entities.DictionaryEntity">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.gecco.firstgecco.entities.DictionaryEntity" useGeneratedKeys="true">
+        insert into dictionary_entity
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dictionaryCode != null">
+                Dictionary_code,
+            </if>
+            <if test="dictionaryType != null">
+                Dictionary_type,
+            </if>
+            <if test="dictionaryName != null">
+                Dictionary_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dictionaryCode != null">
+                #{dictionaryCode,jdbcType=VARCHAR},
+            </if>
+            <if test="dictionaryType != null">
+                #{dictionaryType,jdbcType=VARCHAR},
+            </if>
+            <if test="dictionaryName != null">
+                #{dictionaryName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.gecco.firstgecco.entities.DictionaryEntity">
+        update dictionary_entity
+        <set>
+            <if test="dictionaryCode != null">
+                Dictionary_code = #{dictionaryCode,jdbcType=VARCHAR},
+            </if>
+            <if test="dictionaryType != null">
+                Dictionary_type = #{dictionaryType,jdbcType=VARCHAR},
+            </if>
+            <if test="dictionaryName != null">
+                Dictionary_name = #{dictionaryName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.gecco.firstgecco.entities.DictionaryEntity">
     update dictionary_entity
     set Dictionary_code = #{dictionaryCode,jdbcType=VARCHAR},
       Dictionary_type = #{dictionaryType,jdbcType=VARCHAR},
@@ -74,10 +76,12 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="selectByTypeAndCode" parameterType="com.gecco.firstgecco.entities.DictionaryEntity" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from dictionary_entity
-    where Dictionary_code = #{dictionaryCode,jdbcType=VARCHAR} and Dictionary_type = #{dictionaryType,jdbcType=VARCHAR}
-  </select>
+    <select id="selectByTypeAndCode" parameterType="com.gecco.firstgecco.entities.DictionaryEntity"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dictionary_entity
+        where Dictionary_code = #{dictionaryCode,jdbcType=VARCHAR} and Dictionary_type =
+        #{dictionaryType,jdbcType=VARCHAR}
+    </select>
 </mapper>
